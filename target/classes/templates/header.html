@@ -1,0 +1,90 @@
+<!-- header.html -->
+<header>
+    <nav>
+        <ul>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Oracle Operations</a>
+                <div class="dropdown-content">
+                    <a href="javascript:void(0);" onclick="openPage('createUser.html')">Create User</a>
+                    <!--  <a href="javascript:void(0);" onclick="openPage('http://192.168.101.20:8089/oracleUsr/index')">Manage User</a>   -->
+                     <a href="http://192.168.101.20:8089/oracleUsr/index">Manage User</a>
+                  <!--  <a href="javascript:void(0);" onclick="openPage('http://192.168.101.20:8089/oracleUsr/')">Role-Menu Relations</a>  -->
+                    <a href="http://192.168.101.20:8089/oracleUsr/">Role-Menu Relations</a>
+                    <a href="javascript:void(0);" onclick="openPage('userRoleRelations.html')">User-Role Relations</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Documentations</a>
+                <div class="dropdown-content">
+                    <a href="javascript:void(0);" onclick="openPage('appServersDocumentation.html')">APP Servers</a>
+                    <a href="javascript:void(0);" onclick="openPage('wafLinksDocumentation.html')">WAF Links</a>
+                    <a href="javascript:void(0);" onclick="openPage('netBackupDocumentation.html')">NetBackup</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<!-- JavaScript for Header -->
+<script>
+    function openPage(page) {
+        window.location.href = page;
+    }
+</script>
+
+<!-- CSS for Header -->
+<style>
+    /* Add your header styles here */
+    header {
+        background-color: #333;
+        color: white;
+        padding: 10px;
+    }
+
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li {
+        display: inline-block;
+        margin-right: 20px;
+        color: white;  
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #333;
+        min-width: 160px;
+        z-index: 1;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .dropdown-content a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #555;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    /* Style for "Oracle Operations" and "Documentation" text */
+.dropbtn {
+    color: white; /* White text color */
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>

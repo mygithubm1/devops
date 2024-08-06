@@ -1,0 +1,91 @@
+whay the below two approches did not work:
+approch1 send an arrayObject from the postman
+---------------
+{
+  "selectedRoles": [
+    { "username": "MOMANSOUR", "roleCode": "UMX|XXEMP SIGN IN" },
+    { "username": "MOMANSOUR", "roleCode": "UMX|XXEOM ADMINISTRATION - ADMIN" },
+    { "username": "MOMANSOUR", "roleCode": "UMX|XXEPM BUDGET - USER" }
+  ]
+}
+
+
+
+
+    @PostMapping(value= "/revRoles" ,produces = "application/json")
+    public void handleAjaxRequest(@RequestBody JSONArray selectedRoles) {
+        // Initialize variables
+        String username = "";
+
+        // Create an array to store roleCodes
+        String[] arr2 = new String[selectedRoles.length()];
+
+        // Process the selectedRoles array
+        for (int i = 0; i < selectedRoles.length(); i++) {
+            JSONObject roleObject = selectedRoles.getJSONObject(i);
+
+            // Extract the username from the first object
+            if (i == 0) {
+                username = roleObject.getString("username");
+            }
+
+            // Extract the roleCode and add it to the arr2 array
+            String roleCode = roleObject.getString("roleCode");
+            arr2[i] = roleCode;
+        }
+
+        // Now you have the username in the 'username' variable
+        // and the role codes in the 'arr2' array of strings
+
+        // You can perform further actions or processing with these values
+        // For example, you can print them to the console
+        System.out.println("Username: " + username);
+        System.out.println("Role Codes:");
+        for (String roleCode : arr2) {
+            System.out.println(roleCode);
+        }
+    }
+}
+----------
+approch2 send an jsonobjects from the postman
+and we decided to send json object instead of ArrayJsonobjects as below 
+[
+{ "username": "MOMANSOUR", "roleCode": "UMX|XXEMP SIGN IN" },
+    { "username": "MOMANSOUR", "roleCode": "UMX|XXEOM ADMINISTRATION - ADMIN" },
+    { "username": "MOMANSOUR", "roleCode": "UMX|XXEPM BUDGET - USER" }
+  ]
+  
+   @PostMapping(value= "/revRoles" ,produces = "application/json")
+    public void handleAjaxRequest(@RequestBody JSONObject[] selectedRoles) {
+        // Initialize variables
+        String username = "";
+
+        // Create an array to store roleCodes
+        String[] arr2 = new String[selectedRoles.length()]; //chech .length() or .length
+
+        // Process the selectedRoles array
+        for (int i = 0; i < selectedRoles.length(); i++) {
+            JSONObject roleObject = selectedRoles.getJSONObject(i);
+
+            // Extract the username from the first object
+            if (i == 0) {
+                username = roleObject.getString("username");
+            }
+
+            // Extract the roleCode and add it to the arr2 array
+            String roleCode = roleObject.getString("roleCode");
+            arr2[i] = roleCode;
+        }
+
+        // Now you have the username in the 'username' variable
+        // and the role codes in the 'arr2' array of strings
+
+        // You can perform further actions or processing with these values
+        // For example, you can print them to the console
+        System.out.println("Username: " + username);
+        System.out.println("Role Codes:");
+        for (String roleCode : arr2) {
+            System.out.println(roleCode);
+        }
+    }
+}

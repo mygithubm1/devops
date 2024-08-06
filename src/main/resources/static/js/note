@@ -1,0 +1,13 @@
+this project stoped at the point that previous front router.js didnot load the dynamic content of loaded page i.e js 
+in this one i follow a different appproch header and footer to be inject in each html plage and using them i cal call the controllers which retuurn html pages with their css and js 
+that rendered fine 
+in the next approch i will try to make a welcome screenwithout a major dynamic content with only header and footer and use controllers to load the full pages
+
+
+the issue here when login and controller return index .html it did not show header and footer and the css is not properly adjusted 
+how ever when load /index controller it return the page fine with header and footer loaded also with js and css loaded and work fine
+
+--here we added webconfig class for resource handling using this i can write the url like
+http://192.168.101.20:8089/oracleUsr/css/searchuser.css before resouce handwler the spring was recognize the url as controller 
+--we also use and add jquery library to js folder to handle login form logic 
+also we can use background imagew as url will be http://192.168.101.20:8089/oracleUsr/images/login.png  

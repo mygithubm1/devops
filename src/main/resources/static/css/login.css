@@ -1,0 +1,80 @@
+/* CSS for Login Page */
+
+/*.login-container {    comment1 start
+    text-align: center;
+    margin: 100px auto;
+    max-width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+    background-image: url('../images/login.png');  /* Specify the image path here */
+/* background-size: cover; /* Scale the image to cover the container */
+/* background-position: center; /* Center the image */
+/*}comment1 end _>> thee comment if removed it will make the background for the login form only i willadd below sections for make it over the page body,html{} and .login-container{}*/
+/* CSS for Login Page */
+body,
+html {
+    height: 100%;
+    /* Make sure the body and html elements take the full height of the viewport */
+    margin: 0;
+    /* Remove default margins */
+    padding: 0;
+    /* Remove default padding */
+    background-image: url('../images/login.png');
+    /* Specify the image path here */
+    background-size: cover;
+    /* Scale the image to cover the entire viewport */
+    background-position: center;
+    /* Center the image */
+}
+
+.login-container {
+    text-align: center;
+    margin: 100px auto;
+    max-width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* Rest of your CSS styles for the login form */
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#login-message {
+    font-weight: bold;
+}

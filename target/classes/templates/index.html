@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Search</title>
+    <link rel="stylesheet" href="css/searchuser.css">
+</head>
+
+<body>
+    <!-- Include the header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Your main content goes here -->
+    <main> <!-- this tag added for header and footer modification -->
+        <div class="container">
+            <h1>User Search</h1>
+            <div class="search-box">
+                <input type="text" id="empno" placeholder="Employee Number">
+                <input type="text" id="user_name" placeholder="Username">
+                <button id="searchButton">Search</button>
+            </div>
+            <div class="results">
+                <h1>User List</h1>
+                <div class="table-container"> <!-- added to make the table scrolable itself and fix the hader -->
+                    <table id="userTable">
+                        <thead>
+                            <tr>
+                                <th>User Name</th>
+                                <th>Description</th>
+                                <th>Email Address</th>
+                                <th>Last Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Edit User Modal -->
+            <div id="editUserModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="closeUserModal">&times;</span>
+                    <h2>Edit User</h2>
+
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="modalUsername">User Name:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="modalUsername" class="inputmodal" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="modalEmail">Email:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="modalEmail" class="inputmodal" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="modalDescription">Description:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="modalDescription" class="inputmodal">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="modalStatus">Status:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="modalStatus" class="inputmodal" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="modalRequiredFirstLogin">Required First Login:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="modalRequiredFirstLogin" class="inputmodal" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="modalName">Name:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="modalName" class="inputmodal" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="modalEffectiveStartDate">Effective Start Date:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="modalEffectiveStartDate" class="inputmodal" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="modalEffectiveEndDate">Effective End Date:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="modalEffectiveEndDate" class="inputmodal">
+                        </div>
+                    </div>
+
+                    <div class="modal-buttons row">
+                        <div class="col-25">
+
+                        </div>
+                        <div class="col-75">
+                            <button id="resetPwdButton" onclick="resetPassword()">Reset PWD</button>
+                            <button id="saveEndDateButton" onclick="saveEndDate()">Save End-Date</button>
+                            <!-- below comments resp and roles button inside the edit user modal 
+                            <button id="manageRolesButton" onclick="manageRoles()">Manage Roles</button>
+                            <button id="manageRespButton" onClick="manageResp()">Manage Resp</button>
+                              -->
+                            <button id="saveDescButton" onclick="manageRoles()">Save Desc</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Reset Password Modal -->
+        <div id="resetPasswordModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeResetPWDModal">&times;</span>
+                <h3>Reset Password</h3>
+                <label for="newPassword">New Password:</label>
+                <input type="text" id="newPassword" value="Aa12345678">
+                <button id="resetPasswordButton" onclick="resetPasswordAction()">Reset</button>
+            </div>
+        </div>
+
+
+        <!-- Role Modal -->
+        <div id="roleModal" class="role-modal">
+            <div class="modal-content">
+                <span class="close" id="closeRoleModal">&times;</span>
+                <h2>User Roles</h2>
+
+                <!-- Top Half: User Roles Table and Buttons -->
+                <div class="top-half">
+                    <div class="table-container"> <!-- added to make the table scrolable itself and fix the hader -->
+                        <table id="userRolesTable">
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Role Code</th>
+                                    <th>Role Status</th>
+                                    <th>User Role Status</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="role-actions">
+                        <button id="revokeSelectedButton">Revoke Selected</button>
+                        <button id="activateSelectedButton">Activate Selected</button>
+                        <button id="refreshRolesButton">Refresh My Roles</button>
+                    </div>
+                </div>
+
+                <!-- Left Vertical Section: Role Name Search -->
+                <div class="left-vertical-section">
+                    <h3>Search by Role Name</h3>
+                    <input type="text" id="roleNameSearchInput" placeholder="Role Name">
+                    <button id="roleNameSearchButton" class="Search">Search</button>
+                    <div class="table-container"> <!-- added to make the table scrolable itself and fix the hader -->
+                        <table id="roleNameSearchTable">
+                            <thead>
+                                <tr>
+                                    <th>Role Code</th>
+                                    <th>Status</th>
+                                    <th>End Date</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="role-actions">
+                        <button id="grantRoleButton">Grant Selected</button>
+                    </div>
+                </div>
+
+                <!-- Right Vertical Section: Emp No and User Name Search -->
+                <div class="right-vertical-section">
+                    <h3>Search by Emp No or User Name</h3>
+                    <input type="text" id="empNoSearchInput" placeholder="Emp No">
+                    <input type="text" id="userNameSearchInput" placeholder="User Name">
+                    <button id="empUserSearchButton" class="Search">Search</button>
+                    <div class="table-container"> <!-- added to make the table scrolable itself and fix the hader -->
+                        <table id="empUserSearchTable">
+                            <thead>
+                                <tr>
+                                    <th>Role Code</th>
+                                    <th>Role Status</th>
+                                    <th>User Role Status</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="role-actions">
+                        <button id="grantEmpUserButton">Grant Selected</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Resp Modal -->
+        <div id="respModal" class="role-modal">
+            <div class="modal-content">
+                <span class="close" id="closeRespModal">&times;</span>
+                <h2>User Responsibilities</h2>
+
+                <!-- Top Half: User Roles Table and Buttons -->
+                <div class="top-half">
+                    <div class="table-container"> <!-- added to make the table scrolable itself and fix the hader -->
+                        <table id="userRespTable">
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Responsibility</th>
+                                    <th>Application</th>
+                                    <th>Start Date</th>
+                                    <!-- Toable headers name only no relations between then and const cells in javascript as const cell used to amtch json key to get data from it -->
+                                    <th>End Date</th>
+                                    <th>Responsibility Key</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="Resp-actions">
+                        <button id="setEndDateButton">Set End Date</button>
+                        <button id="refreshRespsButton">Refresh My Responsibilities</button>
+                    </div>
+                </div>
+
+                <!-- Left Vertical Section: Resp Name Search -->
+                <div class="left-vertical-section">
+                    <h3>Search by Resp Name</h3>
+                    <input type="text" id="respNameSearchInput" placeholder="Responsibility Name">
+                    <button id="respNameSearchButton" class="Search">Search</button>
+                    <div class="table-container"> <!-- added to make the table scrolable itself and fix the hader -->
+                        <table id="respNameSearchTable">
+                            <thead>
+                                <tr>
+                                    <th>Responsibility</th>
+                                    <th>Responsibility Key</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="Resp-actions">
+                        <button id="grantRespButton">Grant Selected</button>
+                    </div>
+                </div>
+
+                <!-- Right Vertical Section: Emp No and User Name Search -->
+                <div class="right-vertical-section">
+                    <h3>Search by Emp No or User Name</h3>
+                    <input type="text" id="RespempNoSearchInput" placeholder="Emp No">
+                    <input type="text" id="RespuserNameSearchInput" placeholder="User Name">
+                    <button id="respEmpUserSearchButton" class="Search">Search</button>
+                    <div class="table-container"> <!-- added to make the table scrolable itself and fix the hader -->
+                        <table id="respEmpUserSearchTable">
+                            <thead>
+                                <tr>
+                                    <th>Responsibility</th>
+                                    <th>Application</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="Resp-actions">
+                        <button id="respGrantEmpUserButton">Grant Selected</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- set End Date resp Modal -->
+        <div id="respEndDateModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closerespEndDateModal">&times;</span>
+                <h2>Enter End Date</h2>
+                <input type="text" id="respEndDateInput"
+                    placeholder="22-10-2021 or 22-OCT-2021 whatever delimiter - or /">
+                <button id="saveRespEndDateBtn">Save</button>
+            </div>
+        </div>
+    </main> <!-- this tag added for header and footer modification -->
+    <!-- Include the footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JavaScript for including header and footer -->
+    <script>
+        // Function to load the header and footer
+        function includeHeaderAndFooter() {
+            const headerPlaceholder = document.getElementById('header-placeholder');
+            const footerPlaceholder = document.getElementById('footer-placeholder');
+
+            // Fetch and insert the header
+            fetch('./templates/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    headerPlaceholder.innerHTML = data;
+                });
+
+            // Fetch and insert the footer
+            fetch('./templates/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    footerPlaceholder.innerHTML = data;
+                });
+        }
+
+        // Call the function to include header and footer
+        includeHeaderAndFooter();
+    </script>
+    <script src="js/searchuser.js"></script>
+
+</body>
+
+</html>
